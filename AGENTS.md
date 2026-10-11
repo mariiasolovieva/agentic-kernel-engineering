@@ -1,31 +1,31 @@
-# AGENTS.md - применение ИИ-агента на начальных этапах исследования по новой научной тематике
+# AGENTS.md — Application of an AI agent in the early stages of research on a new scientific topic
 
-Название проекта: применение Байесовской оптимизации с регрессией Гауссовского процесса для поиска глобального минимума в пространстве возможных конфигураций матрица-интеркалянт на модельной структуре графит-литий
+Project name: Application of Bayesian optimization with Gaussian process regression to find the global minimum in the space of possible matrix–intercalant configurations on a model graphite–lithium structure
 
-Общая задача: научиться быстро находить самые низкоэнергетические конфигурации для n интеркалированных в матрицу атомов
+General task: Learn to quickly find the lowest-energy configurations for n atoms intercalated into the matrix
 
-## Цель проекта
-Разобраться, как закодировать локальное окружение атомов Li в графитовых анодах с помощью SOAP и статистического пулинга в вектор фиксированной размерности, пригодный для байесовской оптимизации (BO) и гауссовской регрессии (GPR). Собрать прототип кода, который принимает структуры с разным числом интеркалированных атомов, обучает GPR и позволяет сравнить эффективность разных ядер. Запуск расчетов на кластер не выполняется, только анализ литературы, составление плана работы и тестов и анализ предоставленных результатов.
+## Project goal
+Understand how to encode the local environment of Li atoms in graphite anodes using SOAP and statistical pooling into a fixed-dimension vector suitable for Bayesian optimization (BO) and Gaussian process regression (GPR). Build a code prototype that accepts structures with different numbers of intercalated atoms, trains GPR, and allows comparing the efficiency of different kernels. No cluster calculations are performed; only literature analysis, drafting of a work plan and tests, and analysis of provided results.
 
-## Данные и материалы
-- `data/papers/` — PDF статей, только чтение.
-- `data/structures/` — примеры структур из тренировочного набора (в формате POSCAR).
-- `results/` — таблицы, графики, артефакты прототипа.
-- `src/` — код прототипа.
+## Data and materials
+- `data/papers/` — PDF articles, read-only.
+- `data/structures/` — example structures from the training set (in POSCAR format).
+- `results/` — tables, plots, prototype artifacts.
+- `src/` — prototype code.
 
-## Как работать
-- Код — в `src/`, запускать локально перед тем, как сообщать результат.
-- Каждый вывод сопровождается способом его проверки.
-- Для утверждений из литературы указывать страницу и короткую цитату.
-- Не запускать DFT, MD, MLIP и другие внешние расчёты.
-- Сводки и заметки для следующих сессий — в `memory/`.
+## How to work
+- Code goes in `src/`, run locally before reporting results.
+- Every conclusion must be accompanied by a way to verify it.
+- For statements from literature, indicate page and a short quote.
+- Do not run DFT, MD, MLIP, or other external calculations.
+- Summaries and notes for future sessions — in `memory/`.
 
-## Журнал
-- После каждой задачи — запись в `diary.md`: дата, запрос, что сделано,
-  результат, точка проверки, итог проверки. Старые записи не менять.
+## Journal
+- After each task — an entry in `diary.md`: date, request, what was done,
+  result, verification point, verification outcome. Do not modify old entries.
 
-  ## Запрещено
-- Удалять или перезаписывать файлы в `data/`.
-- Читать и выводить содержимое `.env` и других файлов с ключами.
-- Выполнять `git push`, `rm -rf`, `sudo` без подтверждения.
-- Запускать расчёты на кластере или HPC.
+## Prohibited
+- Delete or overwrite files in `data/`.
+- Read and output the contents of `.env` and other files with keys.
+- Execute `git push`, `rm -rf`, `sudo` without confirmation.
+- Run calculations on a cluster or HPC.

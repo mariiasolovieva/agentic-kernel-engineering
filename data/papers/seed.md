@@ -1,52 +1,53 @@
 # Seed literature
 
-Стартовый список литературы. Агент может расширять его, но начинать с этих статей.
+Starting list of literature. The agent may expand it, but should start with these articles.
 
-## SOAP и дескрипторы локального окружения
+## SOAP and local environment descriptors
 - Bartók, Kondor, Csányi (2013). "On representing chemical environments".
-  О чём: определение SOAP, power spectrum, сравнение с другими дескрипторами.
-  Зачем: базовая формула для кодирования окружения атома Li.
+  What it's about: definition of SOAP, power spectrum, comparison with other descriptors.
+  Why: basic formula for encoding the environment of a Li atom.
   PDF: data/papers/bartok2013_soap.pdf
 
 - Behler (2011). "Atom-centered symmetry functions for constructing high-dimensional neural network potentials".
-  О чём: симметрийные функции, инвариантность к поворотам и перестановкам.
-  Зачем: понять, какие свойства дескриптора важны для GPR.
+  What it's about: symmetry functions, invariance to rotations and permutations.
+  Why: understand which descriptor properties are important for GPR.
   PDF: data/papers/behler2011_acsf.pdf
 
 ## Set representation
 - Xie et al. (2025). "Advances in Set Function Learning: A Survey of Techniques and Applications".
-  О чём: как представить множество элементов вектором фиксированной длины.
-  Зачем: выбор варианта пулинга для разного числа интеркалированных атомов в матрице.
+  What it's about: how to represent a set of elements as a fixed-length vector.
+  Why: choosing a pooling variant for different numbers of intercalated atoms in the matrix.
   PDF: data/papers/xie2025_representation.pdf
 
 - Corso et al. (2020). "Principal Neighbourhood Aggregation for Graph Nets".
-  О чём: применение статистического пулинга.
-  Зачем: конкретный пример представления множества вектором фиксированной длины - статистический пулинг.
+  What it's about: application of statistical pooling.
+  Why: a concrete example of representing a set as a fixed-length vector — statistical pooling.
   PDF: data/papers/corso2020_stats.pdf
 
-## GPR и BO
-- Mattias Seeger (2004). "Gaussian Processes for Machine Learning". 
-  О чём: теория GPR, ядра, маргинальное правдоподобие.
-  Зачем: основа для выбора ядра и режима обучения.
+## GPR and BO
+- Mattias Seeger (2004). "Gaussian Processes for Machine Learning".
+  What it's about: GPR theory, kernels, marginal likelihood.
+  Why: basis for kernel selection and training mode.
   PDF: data/papers/seeger2004_gpr_basics.pdf
 
-- Shahriari et al. (2016). "Taking the human out of the loop: A review of Bayesian optimization". 
-  О чём: обзор BO, acquisition functions, применение.
-  Зачем: понять, как встроить GPR в цикл BO.
+- Shahriari et al. (2016). "Taking the human out of the loop: A review of Bayesian optimization".
+  What it's about: BO overview, acquisition functions, applications.
+  Why: understand how to embed GPR into the BO loop.
   PDF: data/papers/shahriari2016_bo_basics.pdf
 
-## Подбор ядра
+## Kernel selection
 - Duvenaud et al. (2013). "Structure discovery in nonparametric regression through compositional kernel search".
-  О чём: поиск структуры ядра как композиции базовых.
-  Зачем: подзадача выбора комбинации ядер.
-  PDF: duvenaud13_composition_kernel.pdf
+  What it's about: searching for kernel structure as a composition of base kernels.
+  Why: subproblem of choosing a kernel combination.
+  PDF: data/papers/duvenaud13_composition_kernel.pdf
 
-- Shuaib et al. (2025). "Multikernel similarity-based clustering of amorphoussystems and machine-learned interatomic potentials byactive learning".
-  О чём: гибридное ядро подобия, которое демонстрирует интеграцию дескрипторов ближнего и дальнего действия с помощью метода усредненного ядра.
-  Зачем: приложение similarity kernel к химическим системам; статья похожа на мою идею для аккумуляторов, но реализованная на других системах.
-  PDF: shuaib2024_multikernel_amorphous.pdf
+- Shuaib et al. (2025). "Multikernel similarity-based clustering of amorphous systems and machine-learned interatomic potentials by active learning".
+  What it's about: a hybrid similarity kernel that demonstrates the integration of short- and long-range descriptors using the averaged kernel method.
+  Why: application of a similarity kernel to chemical systems; the article is similar to my idea for batteries, but implemented on other systems.
+  PDF: data/papers/shuaib2024_multikernel_amorphous.pdf
 
 - Lei et al. (2016). "Localized Multiple Kernel Learning—A Convex Approach".
-  О чём: выпуклый подход к обучению нескольких ядер
-  Зачем: описание варианта решения задачи подбора параметров ядра как выпуклой задачи. Пригодится для второго проекта по этой теме, но для курса "Выпуклый анализ и оптимизация".
-  PDF: lei2016_multiple_kernel.pdf
+  What it's about: a convex approach to multiple kernel learning.
+  Why: description of an approach to solving the kernel parameter selection problem as a convex problem. Useful for the second project on this topic, but for the course "Convex Analysis and Optimization".
+  PDF: data/papers/lei2016_multiple_kernel.pdf
+  
