@@ -77,3 +77,20 @@ explicitly instead of guessing. After editing, print 'Literature analysis done',
 ### Итог 1.2
 
 Теперь план работы полностью укомплектован. 
+
+## Задача 2: сжатие статьи
+
+Я хочу сжать статью data/papers/shuaib2024_multikernel_amorphous.pdf - это прикладная статья в области материаловедения с обширной математической базой, то, к чему я стремлюсь в своей работе.
+
+### Запрос 2.1
+
+Read data/papers/shuaib2024_multikernel_amorphous.pdf.
+Create three levels of the text compression:
+- memory/L1.md — section-by-section summary (Abstract, Introduction,
+  Computational methods, Models, Methodology, Problem statement).
+- memory/L2.md — 5–10 key claims, one sentence each.
+- memory/L3.md — one sentence for the whole paper.
+For at least 3 claims in L2, add a verification line:
+  [verified: p. X, "short quote"]
+Print 'Compression on the levels L1/L2/L3 done'.
+Do not start anything else.
