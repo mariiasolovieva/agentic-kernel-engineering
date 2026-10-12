@@ -9,7 +9,9 @@ Understand how to encode the local environment of Li atoms in graphite anodes us
 
 ## Data and materials
 - `data/papers/` — PDF articles, read-only.
-- `data/structures/` — example structures from the training set (in POSCAR format).
+- `data/structures/` — example structures from the training set (in POSCAR format). All input data (POSCAR files, .csv training sets) is provided by me.
+  Do not generate synthetic structures, do not create toy datasets, do not fabricate any data. If a step requires data that is not in
+  data/structures/ yet, ask me to provide it.
 - `results/` — tables, plots, prototype artifacts.
 - `src/` — prototype code.
 
@@ -19,6 +21,8 @@ Understand how to encode the local environment of Li atoms in graphite anodes us
 - For statements from literature, indicate page and a short quote.
 - Do not run DFT, MD, MLIP, or other external calculations.
 - Summaries and notes for future sessions — in `memory/`.
+- Your role: literature analysis, code writing, verification of results.
+  No data generation, no running cluster calculations.
 
 ## Journal
 - After each task — an entry in `diary.md`: date, request, what was done,
