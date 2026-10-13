@@ -24,6 +24,10 @@ Understand how to encode the local environment of Li atoms in graphite anodes us
 - Your role: literature analysis, code writing, verification of results.
   No data generation, no running cluster calculations.
 
+## Memory between sessions
+- At the start of each session, read `STATUS.md`.
+- After each block of work, update `STATUS.md`: what is done, what is next, active constraints.
+
 ## Journal
 - After each task — an entry in `diary.md`: date, request, what was done,
   result, verification point, verification outcome. Do not modify old entries.
