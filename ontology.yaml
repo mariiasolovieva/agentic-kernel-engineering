@@ -1,0 +1,204 @@
+# ontology.yaml
+# Concept graph for the project:
+# "Application of Bayesian optimization with Gaussian process regression
+#  to find the global minimum in the space of possible matrix-intercalant
+#  configurations on a model graphite-lithium structure."
+#
+# Structure of this file:
+#   classes    — abstract types (what kinds of things exist)
+#   relations  — how classes are linked (subject -> object)
+#   instances  — concrete examples of classes (what we actually have)
+#
+# Abbreviations:
+#   BO    = Bayesian Optimization
+#   GPR   = Gaussian Process Regression
+#   MLIP  = Machine-Learned Interatomic Potential
+#   SOAP  = Smooth Overlap of Atomic Positions
+#   ACSF  = Atom-Centered Symmetry Functions
+#   RBF   = Radial Basis Function
+#   GAP   = Gaussian Approximation Potential
+#   EI    = Expected Improvement
+#   UCB   = Upper Confidence Bound
+
+classes:
+  Material:
+    description: "A chemical system used as an electrode or host matrix."
+  Structure:
+    description: "A concrete atomic configuration of a material."
+  IntercalationSite:
+    description: "A position in the host matrix where a Li atom can be inserted."
+  Descriptor:
+    description: "A numerical representation of a local atomic environment."
+  PoolingMethod:
+    description: "A way to reduce a set of per-atom descriptors to a fixed-length vector."
+  FeatureVector:
+    description: "A fixed-length numerical vector used as input to a model."
+  MLIP:
+    description: "Machine-Learned Interatomic Potential: a surrogate for quantum-mechanical energies and forces."
+  SurrogateModel:
+    description: "A model that approximates a target function from data."
+  Kernel:
+    description: "A similarity function between inputs, used inside a surrogate model."
+  AcquisitionFunction:
+    description: "A function that scores candidate points and selects the next query in an optimization loop."
+  GlobalOptimizer:
+    description: "An algorithm that searches for the global optimum of an objective function."
+  ObjectiveFunction:
+    description: "The scalar function that is being minimized or maximized."
+  Experiment:
+    description: "A computational or literature-based study performed in this project."
+  Result:
+    description: "A produced artifact: a table, plot, file, or metric."
+
+relations:
+  hasStructure:
+    from: Material
+    to: Structure
+    description: "A material has one or more atomic configurations."
+  hasSite:
+    from: Structure
+    to: IntercalationSite
+    description: "A structure contains candidate intercalation sites."
+  describedBy:
+    from: Structure
+    to: Descriptor
+    description: "A structure is encoded by one or more descriptors."
+  pooledBy:
+    from: Descriptor
+    to: PoolingMethod
+    description: "A set of per-atom descriptors is reduced by a pooling method."
+  produces:
+    from: PoolingMethod
+    to: FeatureVector
+    description: "Pooling produces a fixed-length feature vector."
+  evaluatedBy:
+    from: Structure
+    to: MLIP
+    description: "A structure is evaluated with a machine-learned interatomic potential."
+  approximates:
+    from: SurrogateModel
+    to: ObjectiveFunction
+    description: "A surrogate model approximates the objective function."
+  usesKernel:
+    from: SurrogateModel
+    to: Kernel
+    description: "A surrogate model uses a kernel to measure similarity."
+  usesSurrogate:
+    from: GlobalOptimizer
+    to: SurrogateModel
+    description: "A global optimizer relies on a surrogate model."
+  usesAcquisition:
+    from: GlobalOptimizer
+    to: AcquisitionFunction
+    description: "A global optimizer uses an acquisition function to pick the next query."
+  optimizes:
+    from: GlobalOptimizer
+    to: ObjectiveFunction
+    description: "A global optimizer searches for the optimum of the objective function."
+  producesResult:
+    from: Experiment
+    to: Result
+    description: "An experiment produces a result artifact."
+
+instances:
+  # --- Materials ---
+  graphite:
+    class: Material
+    description: "Layered carbon anode material."
+  silicon:
+    class: Material
+    description: "Amorphous silicon anode material."
+
+  # --- Structures ---
+  graphite_Li_config:
+    class: Structure
+    material: graphite
+    description: "A graphite configuration with n intercalated Li atoms."
+
+  # --- Intercalation sites ---
+  intercalation_site:
+    class: IntercalationSite
+    description: "A candidate position between graphite layers."
+
+  # --- Descriptors ---
+  SOAP:
+    class: Descriptor
+    description: "Smooth Overlap of Atomic Positions."
+  ACSF:
+    class: Descriptor
+    description: "Atom-Centered Symmetry Functions."
+  CoulombMatrix:
+    class: Descriptor
+    description: "Coulomb matrix: a global descriptor encoding atomic species and distances."
+
+  # --- Pooling methods ---
+  statistical_pooling:
+    class: PoolingMethod
+    description: "Mean and variance pooling over per-atom descriptor vectors."
+  average_kernel:
+    class: PoolingMethod
+    description: "Average SOAP fingerprint across all atoms in a structure."
+
+  # --- Feature vectors ---
+  pooled_SOAP_vector:
+    class: FeatureVector
+    description: "Fixed-length vector [mu, sigma^2] produced by statistical pooling of SOAP."
+
+  # --- MLIPs ---
+  MACE_MP_0:
+    class: MLIP
+    description: "MACE-MP-0 foundation model."
+  GAP:
+    class: MLIP
+    description: "Gaussian Approximation Potential."
+
+  # --- Surrogate models ---
+  GPR:
+    class: SurrogateModel
+    description: "Gaussian Process Regression."
+
+  # --- Kernels ---
+  RBF:
+    class: Kernel
+    description: "Radial Basis Function (squared exponential) kernel."
+  Matern:
+    class: Kernel
+    description: "Matern kernel."
+  HybridKernel:
+    class: Kernel
+    description: "Weighted sum of two or more base kernels."
+
+  # --- Acquisition functions ---
+  EI:
+    class: AcquisitionFunction
+    description: "Expected Improvement."
+  UCB:
+    class: AcquisitionFunction
+    description: "Upper Confidence Bound."
+
+  # --- Global optimizers ---
+  BayesianOptimization:
+    class: GlobalOptimizer
+    description: "Bayesian Optimization: a global optimizer using a surrogate model and an acquisition function."
+
+  # --- Objective function ---
+  total_energy:
+    class: ObjectiveFunction
+    description: "Total energy of the intercalated structure, to be minimized."
+
+  # --- Experiments ---
+  lit_review:
+    class: Experiment
+    description: "Literature review on SOAP, set representation, BO, and GPR."
+  kernel_comparison:
+    class: Experiment
+    description: "Comparison of kernel choices by marginal likelihood."
+
+  # --- Results ---
+  lit_table:
+    class: Result
+    description: "CSV table summarizing the reviewed literature."
+  kernel_comparison_csv:
+    class: Result
+    description: "CSV table with kernel comparison scores."
+    

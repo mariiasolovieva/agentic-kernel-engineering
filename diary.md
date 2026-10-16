@@ -105,3 +105,38 @@ L2.md
 
 L3.md
 - агент справился с задачей "сжать статью в одно предложение", но предложение получилось в стиле Льва Толстого (очень длинное и сложное, много подробностей/конкретных значений, без чего скорее всего можно было бы обойтись в данной задаче).
+
+### Точка проверки 2.1
+
+
+
+### Итог 2.1
+
+
+
+## Задача 3: генерация файла graph.mmd по ontology.yaml
+
+Я плохо знакома с данным форматом, поэтому я самостоятельно составила онтологию проекта, а graph.mmd доверила сгенерировать агенту.
+
+### Запрос 3
+
+Read AGENTS.md, INDEX.md, and ontology.yaml.
+Generate graph.mmd: a Mermaid diagram of the concept graph from ontology.yaml.
+- Use classes as nodes and relations as labeled edges.
+- Include the instances as leaf nodes, connected to their classes
+  via dashed edges labeled "instance_of".
+- Keep it readable: group by domain if helpful.
+Write the file to graph.mmd in the project root. Then print 'graph.mmd generated' and stop.
+
+### Результат 3
+
+Агент создал flowchart TB с 14 классами, 12 связями и 24 экземплярами.
+
+### Точка проверки 3
+
+Сравнила списки классов/связей/экземпляров в graph.mmd и ontology.yaml — совпадают; проверила 3 правила со слайда 73 лекции недели 3, все выполнены.
+
+
+### Итог 3 
+
+Граф корректен, онтология и мини-граф готовы.

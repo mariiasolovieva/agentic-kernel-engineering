@@ -1,0 +1,120 @@
+flowchart TB
+
+%% ==================== DOMAIN: MATERIALS & STRUCTURE ====================
+subgraph MAT["Materials & Structure"]
+    Material["Material"]
+    Structure["Structure"]
+    IntercalationSite["IntercalationSite"]
+    Material -->|hasStructure| Structure
+    Structure -->|hasSite| IntercalationSite
+end
+
+%% ==================== DOMAIN: DESCRIPTORS & FEATURES ====================
+subgraph DESC["Descriptors & Features"]
+    Descriptor["Descriptor"]
+    PoolingMethod["PoolingMethod"]
+    FeatureVector["FeatureVector"]
+    Structure -.->|describedBy| Descriptor
+    Descriptor -->|pooledBy| PoolingMethod
+    PoolingMethod -->|produces| FeatureVector
+end
+
+%% ==================== DOMAIN: MODELS & OPTIMIZATION ====================
+subgraph OPT["Models & Optimization"]
+    MLIP["MLIP"]
+    SurrogateModel["SurrogateModel"]
+    Kernel["Kernel"]
+    AcquisitionFunction["AcquisitionFunction"]
+    GlobalOptimizer["GlobalOptimizer"]
+    ObjectiveFunction["ObjectiveFunction"]
+    Structure -.->|evaluatedBy| MLIP
+    SurrogateModel -->|approximates| ObjectiveFunction
+    SurrogateModel -->|usesKernel| Kernel
+    GlobalOptimizer -->|usesSurrogate| SurrogateModel
+    GlobalOptimizer -->|usesAcquisition| AcquisitionFunction
+    GlobalOptimizer -->|optimizes| ObjectiveFunction
+end
+
+%% ==================== DOMAIN: EXPERIMENTS & RESULTS ====================
+subgraph EXP["Experiments & Results"]
+    Experiment["Experiment"]
+    Result["Result"]
+    Experiment -->|producesResult| Result
+end
+
+%% ==================== INSTANCES (leaf nodes) ====================
+%% Materials
+graphite["graphite"]
+silicon["silicon"]
+graphite -.->|instance_of| Material
+silicon -.->|instance_of| Material
+
+%% Structures
+graphite_Li_config["graphite_Li_config"]
+graphite_Li_config -.->|instance_of| Structure
+
+%% Intercalation sites
+intercalation_site["intercalation_site"]
+intercalation_site -.->|instance_of| IntercalationSite
+
+%% Descriptors
+SOAP["SOAP"]
+ACSF["ACSF"]
+CoulombMatrix["CoulombMatrix"]
+SOAP -.->|instance_of| Descriptor
+ACSF -.->|instance_of| Descriptor
+CoulombMatrix -.->|instance_of| Descriptor
+
+%% Pooling methods
+statistical_pooling["statistical_pooling"]
+average_kernel["average_kernel"]
+statistical_pooling -.->|instance_of| PoolingMethod
+average_kernel -.->|instance_of| PoolingMethod
+
+%% Feature vectors
+pooled_SOAP_vector["pooled_SOAP_vector"]
+pooled_SOAP_vector -.->|instance_of| FeatureVector
+
+%% MLIPs
+MACE_MP_0["MACE_MP_0"]
+GAP["GAP"]
+MACE_MP_0 -.->|instance_of| MLIP
+GAP -.->|instance_of| MLIP
+
+%% Surrogate models
+GPR["GPR"]
+GPR -.->|instance_of| SurrogateModel
+
+%% Kernels
+RBF["RBF"]
+Matern["Matern"]
+HybridKernel["HybridKernel"]
+RBF -.->|instance_of| Kernel
+Matern -.->|instance_of| Kernel
+HybridKernel -.->|instance_of| Kernel
+
+%% Acquisition functions
+EI["EI"]
+UCB["UCB"]
+EI -.->|instance_of| AcquisitionFunction
+UCB -.->|instance_of| AcquisitionFunction
+
+%% Global optimizers
+BayesianOptimization["BayesianOptimization"]
+BayesianOptimization -.->|instance_of| GlobalOptimizer
+
+%% Objective function
+total_energy["total_energy"]
+total_energy -.->|instance_of| ObjectiveFunction
+
+%% Experiments
+lit_review["lit_review"]
+kernel_comparison["kernel_comparison"]
+lit_review -.->|instance_of| Experiment
+kernel_comparison -.->|instance_of| Experiment
+
+%% Results
+lit_table["lit_table"]
+kernel_comparison_csv["kernel_comparison_csv"]
+lit_table -.->|instance_of| Result
+kernel_comparison_csv -.->|instance_of| Result
