@@ -119,6 +119,27 @@ forms and a clear qualitative comparison:
   > "α_UCB(x; D_n) := μ_n(x) + β_n σ_n(x)"
   with "theoretically motivated guidelines for setting and scheduling the hyperparameter β_n to achieve optimal regret [146]."
 
+**Pros / cons (from Shahriari et al., Proc. IEEE 2016, p.13–15):**
+
+- **EI** (Eq. 44, p.14):
+  - Pros: incorporates the *amount* of improvement, not just its probability
+    (p.14: "One could instead measure the EI [115] which incorporates the
+    amount of improvement"); works well with the adaptive target
+    τ = best observed value (p.14: "it works reasonably with EI in practice
+    [143]"); recent convergence rates proven (p.14: "recently convergence
+    rates have been proven for EI [32]").
+  - Cons: no provable regret bounds (unlike UCB); requires choosing the
+    target τ (though the adaptive best-observed default is standard).
+- **UCB** (Eq. 45, p.14):
+  - Pros: provable cumulative regret bounds (p.14: "the Gaussian process
+    upper confidence bound (GP-UCB [146]) algorithm was proposed as a
+    Bayesian optimistic algorithm with provable cumulative regret bounds");
+    theoretically motivated guidelines for setting/scheduling β_n (p.14:
+    "There are theoretically motivated guidelines for setting and scheduling
+    the hyperparameter β_n to achieve optimal regret [146]").
+  - Cons: performance depends on tuning β_n; no explicit improvement target,
+    so it can be less intuitive to interpret than EI.
+
 **Recommendation:** use **EI** as the primary acquisition function, because
 the paper explicitly states it works well with the adaptive target
 τ = best observed value (p.14: "in practice τ is adaptively set to the best

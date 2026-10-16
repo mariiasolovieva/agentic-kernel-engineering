@@ -108,11 +108,43 @@ L3.md
 
 ### Точка проверки 2.1
 
-
+Все цитирования соответствуют действительности, галлюцинаций и придуманных фактов нет (проверка выполенена по явным указаниям страниц и цитат в L2.md и по общей логике для L1.md и L3.md)
 
 ### Итог 2.1
 
+Сжатие получилось без галлюцинаций, в следующем запросе поправим отсутствие разделов Results и Discussion
 
+### Запрос 2.2
+
+Read memory/L1.md and data/papers/shuaib2024_multikernel_amorphous.pdf.
+The current L1.md is missing the "Results" and "Discussion" sections.
+Add two new subsections to L1.md:
+- "Results": summarize Section 3 (Clustering, AL MLIP, MLIP-MD,
+  structure factors, PDFs, coordination numbers).
+- "Discussion and Conclusion": summarize Section 4.
+For each new subsection, give 2–4 sentences. Keep the same style
+as the existing sections. Do not rewrite the other sections.
+After editing, print 'Resutls and Discussion sections compression done' and stop.
+
+### Запрос 2.3
+
+Also check memory/L2.md: does it include any claims from the Results
+or Conclusion sections? If not, add 1–2 claims with
+[verified: p. X, "quote"] lines.
+And rewrite memory/L3.md: the current sentence is too long.
+Aim for one clear sentence without specific numerical values.
+
+### Результат 2.2-2.3
+
+Агент добавил два блока ("Results" и "Discussion and Conclusions"), в дополнение к уже существующему "Results".
+
+### Точка проверки 2.2-2.3
+
+По содержанию вопросов нет (как и в предыдущих пунктах), но есть некоторая путаница в именовании разделов. 
+
+### Итог 2.2-2.3
+
+По сути, я не указала что нужно модифицировать существующий раздел "Results", так что вопросов к нему нет, только к формулировкам в моих запросах. Содержательно, необходимая задача выполнена. 
 
 ## Задача 3: генерация файла graph.mmd по ontology.yaml
 
@@ -136,7 +168,49 @@ Write the file to graph.mmd in the project root. Then print 'graph.mmd generated
 
 Сравнила списки классов/связей/экземпляров в graph.mmd и ontology.yaml — совпадают; проверила 3 правила со слайда 73 лекции недели 3, все выполнены.
 
-
 ### Итог 3 
 
 Граф корректен, онтология и мини-граф готовы.
+
+## Задача 4: запросы к локальному контексту
+
+### Запрос 4.1
+
+Find the formula for the average SOAP kernel in shuaib2024
+
+### Результат 4.1
+
+$$K_{SOAP}(A,B) = \frac{1}{N_A \times N_B} \sum_{ij} C_{ij}(A,B) = \left[ \ell \left( \frac{1}{N_A} \sum_i P(\epsilon_i^A) \right)^{\top} \cdot \left( \frac{1}{N_B} \sum_j P(\epsilon_j^B) \right) + c_0 \right]^d$$
+
+where:
+- $C_{ij}(A,B) = k(\epsilon_i^A, \epsilon_j^B)$ is the pairwise SOAP similarity between atom $i$ in structure $A$ and atom $j$ in structure $B$ (Eq. 8),
+- $N_A$, $N_B$ are the atom counts of the two configurations,
+- $P(\epsilon_i^A)$ is the SOAP power-spectrum vector of the local environment of atom $i$,
+- $\ell$, $c_0$, $d$ are the polynomial-kernel parameters ($d=4$ in this work),
+- The computation is cheap because it only requires retaining the **average SOAP fingerprint** $\frac{1}{N_A}\sum_i P(\epsilon_i^A)$ across all atom environments in each structure.
+
+This is the same formula already recorded in `memory/L1.md` (Models/Methodology section, Eq. 9).
+
+### Запрос 4.2
+
+Find in shahriari2016_bo_basics.pdf the comparison of EI and UCB. Write down pros and cons for each acquisition function and choose a more appropriate for our work_plan.md.
+
+### Результат 4.2
+
+The work_plan.md now has an explicit pros/cons breakdown for EI and UCB, verified against the Shahriari paper (p.13–15), plus the recommendation.
+
+## Summary
+
+**EI (Expected Improvement)** — Shahriari p.14, Eq. 44:
+- **Pros:** incorporates the *amount* of improvement (not just probability); works well with the adaptive target τ = best observed value; convergence rates proven.
+- **Cons:** no provable regret bounds; requires choosing target τ.
+
+**UCB (Upper Confidence Bound)** — Shahriari p.14, Eq. 45:
+- **Pros:** provable cumulative regret bounds (GP-UCB); theoretically motivated guidelines for setting/scheduling β_n.
+- **Cons:** performance depends on tuning β_n; no explicit improvement target, less intuitive.
+
+**Choice for our work_plan:** **EI** as the primary acquisition function — the paper explicitly states it works well with the adaptive best-observed target, whereas PI is overly greedy. UCB is kept as a valid alternative with provable regret bounds; we run both and compare convergence empirically (the paper warns "no single acquisition strategy provides better performance over all problem instances", p.15).
+
+I added the explicit pros/cons block to `memory/work_plan.md` §2.5.2 (all quotes verified against the paper). The recommendation was already present and is now backed by the clearer breakdown.
+
+В context_queries.md я записала еще три примера запросов к локальному контексту, но не стала их прогонять, поскольку в целом мы разобрали новую тему, в которой я только начинаю разбираться - задача была решена.
